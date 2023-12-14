@@ -40,19 +40,14 @@ class Statistics(Base):
     mean_rank_of_suggested = Column(Float, default=0)
 
 
+DB_USER = 'avkaz'
+DB_PASSWORD = 'avkazz_pass'
+DB_HOST = 'localhost'  
+DB_PORT = '5432'       
+DB_NAME = 'reddit_items'
 
-# Get the current working directory
-current_directory = os.getcwd()
-
-# Specify the subdirectory for the database file (one directory back)
-db_subdir = os.path.join(current_directory, '..')
-
-# Construct the full path to the SQLite database file
-db_file_path = os.path.join(db_subdir, 'reddit_items.db')
-
-
-# Construct the connection URL for SQLite
-db_url = f'sqlite:///{db_file_path}'
+# Construct the PostgreSQL database URL
+db_url = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
 
 # Create engine
 engine = create_engine(db_url)
