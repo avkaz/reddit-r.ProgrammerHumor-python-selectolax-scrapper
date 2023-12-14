@@ -44,7 +44,7 @@ DB_USER = 'avkaz'
 DB_PASSWORD = 'avkazz_pass'
 DB_HOST = 'localhost'  
 DB_PORT = '5432'       
-DB_NAME = 'reddit_items'
+DB_NAME = 'reddit_items.db'
 
 # Construct the PostgreSQL database URL
 db_url = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}'
