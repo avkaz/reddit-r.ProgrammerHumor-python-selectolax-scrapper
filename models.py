@@ -40,11 +40,6 @@ class Statistics(Base):
     mean_rank_of_suggested = Column(Float, default=0)
 
 
-DB_USER = 'avkaz'
-DB_PASSWORD = 'avkazz_pass'
-DB_HOST = 'localhost'  
-DB_PORT = '5432'       
-DB_NAME = 'reddit_items.db'
 
 DB_USER = os.environ.get('DB_USER')
 DB_PASSWORD = os.environ.get('DB_PASSWORD')
