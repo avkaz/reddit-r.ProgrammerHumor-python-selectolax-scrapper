@@ -4,6 +4,7 @@ from playwright.sync_api import sync_playwright
 from items import RedditItem
 from pipelines import RedditPipeline
 from selectolax.parser import HTMLParser
+from traceback import print_exc
 
 class RedditscraperSpider:
     name = "redditScraper"
@@ -76,7 +77,7 @@ class RedditscraperSpider:
     def run_spider(self):
         logging.basicConfig(level=logging.INFO)
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=False)
+            browser = p.chromium.launch(headless=True)
             context = browser.new_context()
             page = context.new_page()
 
@@ -94,6 +95,7 @@ class RedditscraperSpider:
 
             except Exception as e:
                 logging.error(f"An error occurred: {e}")
+                print_exc()
 
             finally:
                 context.close()
