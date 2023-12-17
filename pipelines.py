@@ -1,11 +1,10 @@
 import pandas as pd
 from items import RedditItem
 import re
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 from models import RedditItemDB, Session
 from sqlalchemy import func
-
+import logging
 class RedditPipeline:
 
     new_items_count = 0  # Change the attribute name
