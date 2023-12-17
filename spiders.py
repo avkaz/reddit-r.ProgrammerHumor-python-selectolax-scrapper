@@ -13,10 +13,10 @@ class RedditscraperSpider:
     target_url = "https://www.reddit.com/r/ProgrammerHumor/new/"
     username = "Own_Astronaut_6220"
     password = "1Villageinthehole!"
-    TIMEOUT = 5000  # Increased timeout value (5 seconds)
-    SCROLL_LIMIT = 50  # Set your desired scroll limit
+    TIMEOUT = 2000  # Increased timeout value (5 seconds)
+    SCROLL_LIMIT = 2  # Set your desired scroll limit
 
-    def __init__(self):
+    def __init__(self, items_pipeline):
         self.items_pipeline = RedditPipeline()
 
     def login(self, page):
@@ -75,6 +75,7 @@ class RedditscraperSpider:
                 self.items_pipeline.process_item(item)
 
     def run_spider(self):
+        logging.info("Spider is starting...")
         logging.basicConfig(level=logging.INFO)
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
@@ -100,6 +101,7 @@ class RedditscraperSpider:
             finally:
                 context.close()
                 # self.items_pipeline.save_items_to_csv()
+                logging.info("Spider finished.")
                 self.items_pipeline.save_items_to_db()
 
 if __name__ == "__main__":
