@@ -7,9 +7,24 @@ from models import RedditItemDB, Session
 from sqlalchemy import func
 
 class RedditPipeline:
+
+    new_items_count = 0  # Change the attribute name
+
     def __init__(self):
         self.items = []
         self.session = Session()
+
+    @classmethod
+    def increment_new_items_count(cls):
+        cls.new_items_count += 1  # Change the attribute name
+
+    @classmethod
+    def get_new_items_count(cls):
+        return cls.new_items_count  # Change the attribute name
+
+    @classmethod
+    def reset_new_items_count(cls):
+        cls.new_items_count = 0  # Change the attribute name
 
     def extract_integer(self, value):
         # Extract all integers from the string, join them, and convert to integer
@@ -57,26 +72,27 @@ class RedditPipeline:
                 posted_when=item.posted_when,
             )
             self.session.add(db_item)
+            self.increment_new_items_count() # Increment the count for new items
 
         # Add item to the list
         self.items.append(item)
 
     def save_items_to_db(self):
+        logging.info("Saving to db.")
+
         try:
             # Commit changes to the database
             self.session.commit()
-            print("Items saved to the database.")
         except Exception as e:
-            print(f"An error occurred while saving items to the database: {e}")
+            logging.error(f"An error occurred while saving items to the database: {e}")
         finally:
             # Close the session
+            logging.info(f"Number of new items added to the database: {self.new_items_count}")
             self.session.close()
-
-
 
     def save_items_to_csv(self):
         if not self.items:
-            print("No items to save.")
+            logging.info("No items to save.")
             return
 
         # Convert items list to a list of dictionaries
@@ -97,5 +113,4 @@ class RedditPipeline:
         csv_file_path = 'reddit_items.csv'
         df.to_csv(csv_file_path, index=False, encoding='utf-8')
 
-        print(f"Items saved to {csv_file_path}")
-
+        logging.info(f"Items saved to {csv_file_path}")
