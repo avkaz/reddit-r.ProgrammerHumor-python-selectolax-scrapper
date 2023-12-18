@@ -17,7 +17,7 @@ class RedditItemDB(Base):
     comments = Column(Integer, nullable=True, default=None)
     load_order = Column(Integer, nullable=True, default=10)
     url = Column(String, nullable=True, default=None)
-    file_id = Column(Integer, nullable=True, default=None)
+    file_id = Column(String, nullable=True, default=None)
     signature = Column(String, nullable=True, default=None)
     posted_by = Column(String, nullable=True, default=None)
     posted_when = Column(Integer, nullable=True, default=None)
