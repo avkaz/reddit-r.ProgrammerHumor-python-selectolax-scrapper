@@ -54,7 +54,8 @@ def convert_to_local_time(moscow_hour, moscow_minute):
 
 # Define constants for time intervals
 NIGHT_TIME = [
-    convert_to_local_time(4, 0)
+    convert_to_local_time(4, 0),
+    convert_to_local_time(11, 45)
 ]
 
 DAY_TIME = [
