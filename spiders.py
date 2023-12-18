@@ -13,8 +13,8 @@ class RedditscraperSpider:
     target_url = "https://www.reddit.com/r/ProgrammerHumor/new/"
     username = "Own_Astronaut_6220"
     password = "1Villageinthehole!"
-    TIMEOUT = 2000
-    SCROLL_LIMIT = 2000 
+    TIMEOUT = 5000
+    SCROLL_LIMIT = 100 
 
     def __init__(self, items_pipeline):
         self.items_pipeline = RedditPipeline()
