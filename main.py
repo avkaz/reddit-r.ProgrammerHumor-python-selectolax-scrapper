@@ -103,4 +103,5 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     logging.info("Running Main")
     bot.send_message(chat_id, "Бот запущен, ожидайте сообщения о статусе операций.")
+    spider.run_spider()
     schedule_scrapping()
