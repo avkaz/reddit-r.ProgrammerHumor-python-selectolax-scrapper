@@ -34,13 +34,13 @@ def get_items_added_to_db_count():
 def convert_to_local_time(moscow_hour, moscow_minute):
     try:
         # Define the Moscow timezone
-        moscow_tz = pytz.timezone('Europe/Berlin')
+        moscow_tz = pytz.timezone('Europe/Moscow')
 
         # Get the current time in Moscow
         moscow_time = datetime.now(moscow_tz).replace(hour=moscow_hour, minute=moscow_minute, second=0, microsecond=0)
 
         # Convert Moscow time to local time
-        local_tz = pytz.timezone('Europe/Prague')
+        local_tz = pytz.timezone('Europe/Berlin')
         local_time = moscow_time.astimezone(local_tz)
 
         # Format the local time as a string in %H:%M format
