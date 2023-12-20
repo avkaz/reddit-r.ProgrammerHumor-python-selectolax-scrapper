@@ -59,14 +59,19 @@ Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 session = Session()
 
-# Create a new row in the 'statistics' table with default values
-new_statistics = Statistics()
+try:
+    # Check if a row with id = 1 already exists
+    existing_statistics = session.query(Statistics).filter_by(id=1).first()
 
-# Add the new row to the session
-session.add(new_statistics)
+    # If the row doesn't exist, create a new row
+    if not existing_statistics:
+        new_statistics = Statistics()
+        session.add(new_statistics)
+        session.commit()
 
-# Commit the session to persist the changes to the database
-session.commit()
+except Exception as e:
+    session.rollback()
 
-# Close the session
-session.close()
+finally:
+    # Close the session
+    session.close()
