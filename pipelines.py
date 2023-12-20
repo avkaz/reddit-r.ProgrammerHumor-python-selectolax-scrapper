@@ -37,11 +37,10 @@ class RedditPipeline:
         # If 'hour' is in the value, set the numerical part to 1
         return int(0) if 'day' not in value else int(numerical_parts[0]) if numerical_parts else 0
 
-        def set_load_order(self):
+    def set_load_order(self):
         # Get the maximum and second-highest load orders
         max_load_order = self.session.query(func.max(RedditItemDB.load_order)).scalar()
-        second_highest_load_order = self.session.query(func.max(RedditItemDB.load_order)).filter(
-            RedditItemDB.load_order < max_load_order).scalar()
+        second_highest_load_order = self.session.query(func.max(RedditItemDB.load_order)).filter(RedditItemDB.load_order < max_load_order).scalar()
 
         # If there is no second highest load order, set a default value
         if second_highest_load_order is None:
