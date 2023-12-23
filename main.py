@@ -14,8 +14,7 @@ bot_token = '6839500085:AAHjFcHrBiNNTuR3m8-2sWH-2i3q9_HkUjE'
 bot = telebot.TeleBot(bot_token, parse_mode='HTML')
 
 # Get the target channel information
-target_channel_info = bot.get_chat('@status_information')
-chat_id = target_channel_info.id
+chat_id = '-1001999613821'
 
 pipeline = RedditPipeline()
 spider = RedditscraperSpider(pipeline)
