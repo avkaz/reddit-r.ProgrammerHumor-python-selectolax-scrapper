@@ -13,8 +13,8 @@ class RedditscraperSpider:
     target_url = "https://www.reddit.com/r/ProgrammerHumor/new/"
     username = "Own_Astronaut_6220"
     password = "1Villageinthehole!"
-    TIMEOUT = 5000
-    SCROLL_LIMIT = 100 
+    TIMEOUT = 10000  #  timeout value (10 seconds)
+    SCROLL_LIMIT = 10  # Set your desired scroll limit
 
     def __init__(self, items_pipeline):
         self.items_pipeline = RedditPipeline()
@@ -78,15 +78,17 @@ class RedditscraperSpider:
         logging.info("Spider is starting...")
         logging.basicConfig(level=logging.INFO)
         with sync_playwright() as p:
-            browser = p.chromium.launch(headless=True)
+            browser = p.chromium.launch(headless=False)
             context = browser.new_context()
             page = context.new_page()
 
             try:
                 page.goto(self.start_urls[0])
                 self.login(page)
+                logging.info("Logged in successfully")
 
                 page.goto(self.target_url)
+                logging.info("Starting scrolling")
                 self.scroll_to_end(page)
 
                 html = page.content()
