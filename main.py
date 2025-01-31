@@ -10,7 +10,7 @@ from pipelines import RedditPipeline
 from spiders import RedditscraperSpider
 
 # Initialize the Telegram bot
-bot_token = '6839500085:AAHjFcHrBiNNTuR3m8-2sWH-2i3q9_HkUjE'
+bot_token = 'your_telegram_bot_token'
 bot = telebot.TeleBot(bot_token, parse_mode='HTML')
 
 # Get the target channel information
